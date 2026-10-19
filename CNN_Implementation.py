@@ -15,4 +15,12 @@ class CNN(nn.Module):
         self.final_layer = nn.Linear(64, 10)
         
     def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x)
+        return F.log_softmax(self.final_layer(x), dim=1)
         
+    def train(model, train_dataloader, optimizer, device, print_freq=100):
+        model.train()
+        train_loss=0
